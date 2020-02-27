@@ -161,44 +161,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>com.segment.analytics.java</groupId>
-            <artifactId>analytics</artifactId>
-            <version>2.1.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>okio</artifactId>
-                    <groupId>com.squareup.okio</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient</artifactId>
-            <version>${prometheus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalikejdbc</groupId>
-            <artifactId>scalikejdbc_${scala.version}</artifactId>
-            <version>3.4.0-RC1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.spray</groupId>
-            <artifactId>spray-json_${scala.version}</artifactId>
-            <version>1.3.5</version>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.fommil</groupId>-->
-        <!--            <artifactId>spray-json-shapeless_${scala.version}</artifactId>-->
-        <!--            <version>1.1.0</version>-->
-        <!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest-junit -->
-        <!--<dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest-junit_${scala.version}</artifactId>
-            <version>3.0.0-SNAP13</version>
-            <scope>test</scope>
-        </dependency>-->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -210,21 +173,6 @@
             <artifactId>json4s-native_${scala.version}</artifactId>
             <version>${json4s.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_dropwizard</artifactId>
-            <version>${prometheus.version}</version>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.hadoop</groupId>-->
-        <!--            <artifactId>hadoop-aws</artifactId>-->
-        <!--            <version>${hadoop.version}</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.hadoop</groupId>-->
-        <!--            <artifactId>hadoop-common</artifactId>-->
-        <!--            <version>${hadoop.version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-scala-scalatest_2.11</artifactId>
@@ -238,11 +186,7 @@
         </dependency>
 
         <!-- DO NOT REMOVE below runtime dependencies start-->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.6</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql-kafka-0-10_${scala.version}</artifactId>
@@ -253,26 +197,9 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>2.6.7</version>
         </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>logging-interceptor</artifactId>
-            <version>3.12.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-kubernetes_${scala.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-client</artifactId>
-            <version>${kubernetes.client.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.datasyslab</groupId>
-            <artifactId>geospark-sql_2.3</artifactId>
-            <version>1.3.1</version>
-        </dependency>
+
+
+
         <!-- DO NOT REMOVE below runtime dependencies end -->
     </dependencies>
 </project>
