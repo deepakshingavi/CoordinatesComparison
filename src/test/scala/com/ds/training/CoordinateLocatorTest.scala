@@ -3,10 +3,9 @@ package com.ds.training
 import com.ds.training.Constant._
 import com.ds.training.CoordinateLocator.rootLogger
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
-import org.apache.spark.sql.Row
 class CoordinateLocatorTest
   extends AnyFunSuite
     with BeforeAndAfterAll {
@@ -99,7 +98,7 @@ class CoordinateLocatorTest
 
   }
 
-  test("Schematize the incoming CSV data from Kafka")  {
+  /*test("Schematize the incoming CSV data from Kafka")  {
     val df = sparkSession.readStream
         .schema(stdSchema)
       .csv(prefix + USER_DATA_DIR)
@@ -117,7 +116,7 @@ class CoordinateLocatorTest
 
   test("Join the real time data") {
 
-  }
+  }*/
 
   case class UserLocation(userUUID: String, userLat: Double, userLng: Double)
 
