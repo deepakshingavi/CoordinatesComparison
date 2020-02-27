@@ -73,7 +73,7 @@ object CoordinateLocator extends Serializable {
 
           val result = stitchDataForMinDistance(userTemp,airportDf)
           result.foreach(r => {
-            rootLogger.info(s"airportId=${r.getAs[String](0)} userId=${r.getAs[String](1)} distance=${r.getAs[String](2)}")
+            rootLogger.info(s"userId=${r.getAs[String](0)} airportId=${r.getAs[String](1)} distance=${r.getAs[String](2)}")
             val rec = new ProducerRecord[String, String](outputTopic,r.getAs[String](0).concat(",").concat(r.getAs[String](1)))
             val producer = new KafkaProducer[String, String](kafkaProducerProps)
             val o = producer.send(rec)
@@ -129,7 +129,7 @@ object CoordinateLocator extends Serializable {
     //      .withWatermark("timestamp","1 seconds")
 
     val t4 = System.nanoTime()
-    rootLogger.debug(s"Elapsed time::: ${t4 - t1} ns")
+    rootLogger.debug(s"Elapsed time::: ${t4 - t0} ns")
 
     resultDF
   }
