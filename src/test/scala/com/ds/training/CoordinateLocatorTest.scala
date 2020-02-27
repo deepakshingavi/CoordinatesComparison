@@ -27,7 +27,8 @@ class CoordinateLocatorTest
 
 
   test("Test the input data schema") {
-    val df = sparkSession.read.option("header", "true")
+    val df = sparkSession.read
+      .option("header", "true")
       .schema(airportDataSchema)
       .csv(AIRPORT_DATA_FILE_PATH)
     //    assert(df.schema == airportDataSchema)
@@ -38,21 +39,23 @@ class CoordinateLocatorTest
   test("Test the input user data schema") {
     val df = sparkSession.read.option("header", "true")
       .schema(airportDataSchema)
-      .csv(AIRPORT_DATA_FILE_PATH)
+      .csv(USER_DATA_DIR)
     //    assert(df.schema == airportDataSchema)
-    assert(df.count() == 6889)
+    assert(df.count() == 2)
   }
 
   test("Join the data") {
 
-    val dfUser = sparkSession.read.option("header", "true")
+    val dfUser = sparkSession.read
+      // .option("header", "true")
       .schema(airportDataSchema)
       .csv(USER_DATA_FILE_PATH)
       .withColumnRenamed("uuid",USER_ID_COLUMN)
       .withColumnRenamed("geoip_latitude",USER_LAT_COLUMN)
       .withColumnRenamed("geoip_longitude",USER_LNG_COLUMN)
 
-    val dfAirport = sparkSession.read.option("header", "true")
+    val dfAirport = sparkSession.read
+      //.option("header", "true")
       .schema(airportDataSchema)
       .csv(AIRPORT_DATA_FILE_PATH)
       .withColumnRenamed("uuid",AIRPORT_ID_COLUMN)

@@ -157,8 +157,8 @@ object Constant {
   val prefix = "/Users/dshingav/openSourceCode/CoordinatesComparison/"
   val USER_DATA_DIR = "src/main/resources/user/"
   val AIRPORT_DATA_DIR = "src/main/resources/airport/"
-  val USER_DATA_FILE_PATH = "src/main/resources/user-geo-sample.csv"
-  val AIRPORT_DATA_FILE_PATH = "src/main/resources/optd-airports-sample.csv"
+  val USER_DATA_FILE_PATH = "src/main/resources/user/sample-user-data.csv"
+  val AIRPORT_DATA_FILE_PATH = "src/main/resources/airport/sample-airport-data.csv"
 
   val AIRPORT_ID_COLUMN = "airportId"
   val AIRPORT_LAT_COLUMN = "airportLat"

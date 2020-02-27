@@ -36,13 +36,15 @@ object CoordinateLocator extends Serializable {
       spark.conf.set("spark.sql.crossJoin.enabled", "true")
       val props = new AppProperties(new FileInputStream(propertyFileName))
 
-      val airportDf: DataFrame = spark.read.csv(props.get(AIRPORT_CSV_PATH))
-        .withColumnRenamed("_c0", AIRPORT_ID_COLUMN)
-        .withColumnRenamed("_c1", AIRPORT_LAT_COLUMN)
-        .withColumnRenamed("_c2", AIRPORT_LNG_COLUMN)
+      val airportDf: DataFrame = spark.read
+          .option("header","true")
+        .csv(props.get(AIRPORT_CSV_PATH))
+        .withColumnRenamed("iata_code", AIRPORT_ID_COLUMN)
+        .withColumnRenamed("latitude", AIRPORT_LAT_COLUMN)
+        .withColumnRenamed("longitude", AIRPORT_LNG_COLUMN)
+
         .cache()
       //        .withWatermark("airportTimestamp", "10 seconds ")
-
 
       val userDf: DataFrame = spark.readStream.format("kafka")
         .option("subscribe", props.get(Constant.USER_TOPIC_NAME))
