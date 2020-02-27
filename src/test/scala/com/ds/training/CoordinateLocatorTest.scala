@@ -10,9 +10,6 @@ class CoordinateLocatorTest
   extends AnyFunSuite
     with BeforeAndAfterAll {
 
-//  val USER_DATA_FILE_PATH = "/Users/dshingav/openSourceCode/CoordinatesComparison/src/main/resources/user-geo-sample.csv"
-//  val AIRPORT_DATA_FILE_PATH = "/Users/dshingav/openSourceCode/CoordinatesComparison/src/main/resources/optd-airports-sample.csv"
-
   var sparkSession: SparkSession = _
 
   //uuid,geoip_latitude,geoip_longitude
@@ -51,10 +48,16 @@ class CoordinateLocatorTest
     val dfUser = sparkSession.read.option("header", "true")
       .schema(airportDataSchema)
       .csv(USER_DATA_FILE_PATH)
+      .withColumnRenamed("uuid",USER_ID_COLUMN)
+      .withColumnRenamed("geoip_latitude",USER_LAT_COLUMN)
+      .withColumnRenamed("geoip_longitude",USER_LNG_COLUMN)
 
     val dfAirport = sparkSession.read.option("header", "true")
       .schema(airportDataSchema)
       .csv(AIRPORT_DATA_FILE_PATH)
+      .withColumnRenamed("uuid",AIRPORT_ID_COLUMN)
+      .withColumnRenamed("geoip_latitude",AIRPORT_LAT_COLUMN)
+      .withColumnRenamed("geoip_longitude",AIRPORT_LNG_COLUMN)
 
     sparkSession.conf.set("spark.sql.crossJoin.enabled", "true")
     val map: Map[String, String] = Map("DDEFEBEA-98ED-49EB-A4E7-9D7BFDB7AA0B" -> "16.497695008157372",
@@ -75,15 +78,15 @@ class CoordinateLocatorTest
     val row2 = rows.get(1)
 
     rootLogger.debug("------------------------------------------------")
-    rootLogger.debug(map(row1.getAs[String]("userId")))
+    rootLogger.debug(map(row1.getAs[String](USER_ID_COLUMN)))
     rootLogger.debug(row1.getAs[String]("minDistance"))
     rootLogger.debug("------------------------------------------------")
-    rootLogger.debug(map(row2.getAs[String]("userId")))
+    rootLogger.debug(map(row2.getAs[String](USER_ID_COLUMN)))
     rootLogger.debug(row2.getAs[String]("minDistance"))
     rootLogger.debug("------------------------------------------------")
 
-    assert(map(row1.getAs[String]("userId")).toDouble == row1.getAs[Double]("minDistance"))
-    assert(map(row2.getAs[String]("userId")).toDouble == row2.getAs[Double]("minDistance"))
+    assert(map(row1.getAs[String](USER_ID_COLUMN)).toDouble == row1.getAs[Double]("minDistance"))
+    assert(map(row2.getAs[String](USER_ID_COLUMN)).toDouble == row2.getAs[Double]("minDistance"))
 
 
     /*.foreach(r => {

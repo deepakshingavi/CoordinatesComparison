@@ -71,8 +71,8 @@ object CoordinateLocator extends Serializable {
 
           val result = stitchDataForMinDistance(userTemp,airportDf)
           result.foreach(r => {
-            rootLogger.info(s"airportId=${r.getAs[String](0)} userId=${r.getAs[String](1)} distance=${r.getAs[String](2)} ts=${r.getAs[String](3)}")
-            val rec = new ProducerRecord[String, String](outputTopic,String.format(r.getAs[String](0),",",r.getAs[String](1)))
+            rootLogger.info(s"airportId=${r.getAs[String](0)} userId=${r.getAs[String](1)} distance=${r.getAs[String](2)}")
+            val rec = new ProducerRecord[String, String](outputTopic,r.getAs[String](0).concat(",").concat(r.getAs[String](1)))
             val producer = new KafkaProducer[String, String](kafkaProducerProps)
             val o = producer.send(rec)
           })
@@ -120,7 +120,7 @@ object CoordinateLocator extends Serializable {
     rootLogger.debug(s"Elapsed time: ${t3 - t2} ns")
 
     val resultDF = dfAgg.join(airport, airport("distance") === dfAgg("min(distance)"), "inner")
-      .select(USER_ID_COLUMN, AIRPORT_ID_COLUMN, "min(distance)","userTimestamp")
+      .select(USER_ID_COLUMN, AIRPORT_ID_COLUMN, "min(distance)")
       //      .withColumnRenamed(USER_ID_COLUMN, USER_ID_COLUMN)
       //      .withColumnRenamed("uuid", "airportId")
       .withColumnRenamed("min(distance)", "minDistance")
